@@ -52,13 +52,6 @@ To create a release for basisregisters-auth-lambda, run the release script:
 ```
 The output zip file is stored in the `./dist/basisregisters-auth-lambda` directory path. Please note that this won't be stored in git.
 
-
-To create a release for basisregisters-auth-redis-sync-lambda, run the release script:
-```bash
-./release-redis.sh
-```
-The output zip file is stored in the `./dist/basisregisters-auth-redis-sync-lambda` directory path. Please note that this won't be stored in git.
-
 #### Publish
 
 For publishing, manually upload the zip file to AWS. While Cargo-lambda does support CLI deployment, it is not set up yet.

@@ -25,7 +25,6 @@ impl AppConfig {
             plan_abuse_key: AppConfig::get_env_variable("PLAN_ABUSE_KEY"),
             plan_standard_key: AppConfig::get_env_variable("PLAN_STANDARD_KEY"),
             plan_unlimited_key: AppConfig::get_env_variable("PLAN_UNLIMITED_KEY"),
-            //TODO: add to env var to terraform file
             redis_endpoint: AppConfig::get_env_variable("REDIS_ENDPOINT"),
         }
     }

@@ -2,15 +2,7 @@
 
 ## Goal
 
-> custom aws api gateway authorizer lambda function written in Rust
-
-## Motive for Rust
-
-Before embracing Rust, we had been utilizing high-level languages like Python and JavaScript (Node.js) to handle our AWS authorizer. It soon became apparent that this approach introduced a significant amount of overhead, which in turn hampered the efficiency of our API calls. Several pain points emerged in this scenario, prominently the lambda cold starts and dynamodb cold starts, both of which proved to be substantial bottlenecks.
-
-While quick improvements were achieved by adopting ARM functions over X86_64, a more profound enhancement, though somewhat costly, involved the integration of a Redis cache to curtail the frequency of dynamodb calls. This measure indeed ameliorated the situation, yet it still fell short of the desired level of performance.
-
-And then came Rust. With Rust, we have managed to minimize the overhead to an impressive extent, with an overhead not exceeding 2-4 milliseconds. This transformation has revolutionized our operational efficiency and performance, providing us with a level of speed and responsiveness that was previously out of reach.
+> Lambda function, written in Rust, for updating Redis Cache when changes accor in DynamoDB.
 
 ## Development
 
@@ -46,13 +38,6 @@ cargo clean
 ```
 
 #### Release
-To create a release for basisregisters-auth-lambda, run the release script:
-```bash
-./release-auth.sh
-```
-The output zip file is stored in the `./dist/basisregisters-auth-lambda` directory path. Please note that this won't be stored in git.
-
-
 To create a release for basisregisters-auth-redis-sync-lambda, run the release script:
 ```bash
 ./release-redis.sh
