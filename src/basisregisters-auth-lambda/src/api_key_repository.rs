@@ -68,17 +68,31 @@ impl ApiKeyRepository {
         let database_name = self.app_config.dynamo_db_table_name.to_string();
         let client = DynamoDbClient::new(&config);
 
-        client
+        let res = client
             .get_item()
             .table_name(database_name)
             .key("ApiKey", AttributeValue::S(api_key.to_string()))
             .send()
             .await
             .map(|data| {
-                let api_key_item: ApiKeyItem = serde_dynamo::from_item(data.item.unwrap()).unwrap();
-                return api_key_item;
+                if data.item.is_none() {
+                    return None;
+                }
+
+                let result= serde_dynamo::from_item(data.item.unwrap());
+                if result.is_err() {
+                    return None;
+                }
+
+                let api_key_item: ApiKeyItem = result.unwrap();
+                Some(api_key_item)
             })
             .map_err(|err| eprintln!("Error: {:?}", err))
-            .ok()
+            .ok();
+
+        if res.is_none() {
+            return None;
+        }
+        return res.unwrap();
     }
 }
