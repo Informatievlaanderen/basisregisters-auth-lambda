@@ -162,8 +162,8 @@ impl PolicyDocumentService {
                 None,
                 "user",
                 "deny",
-                Some("Internal Server Error"),
-                Some(500));
+                Some("Invalid api-key. Please contact support!"),
+                Some(403));
         }
 
         let key = api_key_item.unwrap();
