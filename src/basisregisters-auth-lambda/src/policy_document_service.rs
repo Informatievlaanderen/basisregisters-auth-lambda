@@ -162,7 +162,7 @@ impl PolicyDocumentService {
                 None,
                 "user",
                 "deny",
-                Some("Invalid api-key. Please contact support!"),
+                Some("U beschikt niet over de correcte rechten."),
                 Some(403));
         }
 
