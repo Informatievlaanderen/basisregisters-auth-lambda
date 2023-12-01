@@ -25,6 +25,7 @@ pub fn get_x_api_key(event: ApiGatewayCustomAuthorizerRequestTypeRequest, fallba
     let mut api_key = "".to_string();
     let mut key_found = false;
     let header_name = "x-api-key";
+    let query_name= "apikey";
 
     // Lookup in headers
     match get_header_value(&event.headers, header_name) {
@@ -41,13 +42,13 @@ pub fn get_x_api_key(event: ApiGatewayCustomAuthorizerRequestTypeRequest, fallba
     }
 
     let query_params = event.query_string_parameters;
-    let param = get_query_param_value(&query_params, header_name);
+    let param = get_query_param_value(&query_params, query_name);
     match param {
         Some(value) => {
             key_found = true;
             api_key = value;
         }
-        None => println!("x-api-key is not found in QueryParameters")
+        None => println!("apikey is not found in QueryParameters")
     }
 
     if !key_found {
