@@ -37,20 +37,12 @@ impl PolicyDocumentService {
         return (json_str, json_str_encoded);
     }
 
-    fn get_usage_id_key(&self, plan: &str) -> String {
-        if plan == "standard" {
-            return self.app_config.plan_standard_key.to_string();
+    fn get_usage_id_key(&self, plan: &str, api_key: &str) -> String {
+        if plan == "standard" || plan == "abuse" || plan == "unlimited" {
+            return api_key.to_string();
         }
 
-        if plan == "abuse" {
-            return self.app_config.plan_abuse_key.to_string();
-        }
-
-        if plan == "unlimited" {
-            return self.app_config.plan_unlimited_key.to_string();
-        }
-
-        return self.app_config.anon_api_key.to_string();
+        self.app_config.anon_api_key.to_string()
     }
 
     fn get_policy_document(&self, effect: &str) -> ApiGatewayCustomAuthorizerPolicy {
@@ -133,10 +125,10 @@ impl PolicyDocumentService {
         }
 
         let api_key_item = data.unwrap();
-        let plan = api_key_item.plan.to_string();
-        let usage_identifier_key = Some(self.get_usage_id_key(&plan));
-        let (x_output, x_api_token) = self.get_base64_header(api_key_item);
         let api_key = api_key_item.api_key.to_string();
+        let plan = api_key_item.plan.to_string();
+        let usage_identifier_key = Some(self.get_usage_id_key(&plan, &api_key));
+        let (x_output, x_api_token) = self.get_base64_header(api_key_item);
 
         let context = self.get_context(
             Some(&api_key),

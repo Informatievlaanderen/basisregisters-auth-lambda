@@ -4,7 +4,7 @@
 
 > custom aws api gateway authorizer lambda function written in Rust
 
-## Motive for Rust
+## Motivation for Rust
 
 Before embracing Rust, we had been utilizing high-level languages like Python and JavaScript (Node.js) to handle our AWS authorizer. It soon became apparent that this approach introduced a significant amount of overhead, which in turn hampered the efficiency of our API calls. Several pain points emerged in this scenario, prominently the lambda cold starts and dynamodb cold starts, both of which proved to be substantial bottlenecks.
 
