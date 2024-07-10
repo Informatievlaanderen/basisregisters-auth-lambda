@@ -38,11 +38,11 @@ impl PolicyDocumentService {
     }
 
     fn get_usage_id_key(&self, plan: &str, api_key: &str) -> String {
-        if plan == "standard" || plan == "abuse" || plan == "unlimited" {
-            return api_key.to_string();
+        if plan == "anon" {
+            return self.app_config.anon_api_key.to_string();
         }
 
-        self.app_config.anon_api_key.to_string()
+        return api_key.to_string();
     }
 
     fn get_policy_document(&self, effect: &str) -> ApiGatewayCustomAuthorizerPolicy {
